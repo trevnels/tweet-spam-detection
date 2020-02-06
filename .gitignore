@@ -1,0 +1,7 @@
+data/*
+.ipynb_checkpoints/*
+venv/*
+.idea/*
+gnews.embedding
+gnews.embedding.vectors.npy
+GoogleNews-vectors-negative300.bin.gz
