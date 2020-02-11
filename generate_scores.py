@@ -10,9 +10,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.neural_network import MLPRegressor
 
-fresh = False
-retrain = False
-compute_scores = False
 train_size = 5000
 
 model = None
@@ -48,8 +45,6 @@ def embed_tokens(tokens):
             embedding.extend(model[token.lower()])
     embedding.extend((pad_to_length - len(embedding) // 300) * ([0.0, ] * 300))
     return embedding
-
-
 
 
 clf = None
@@ -118,4 +113,4 @@ while True:
     tweet = input("Enter a tweet to evaluate:\n> ")
     if tweet == "exit":
         break
-    print(str(clf.predict([embed_tokens(split_sanitize(tweet))])[0]*100) + "% spaminess")
+    print(str(clf.predict([embed_tokens(split_sanitize(tweet))])[0] * 100) + "% spaminess")
