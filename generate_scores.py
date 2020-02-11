@@ -1,5 +1,6 @@
 import gensim
 import pandas as pd
+from os import path
 from joblib import dump, load
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -11,13 +12,16 @@ compute_scores = False
 train_size = 5000
 
 model = None
-if fresh:
+if not path.exists("gnews.embedding") or not path.exists("gnews.embedding.vectors.npy"):
+    print("Compiling vectors...")
     model = gensim.models.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin.gz', binary=True)
     model.save('gnews.embedding')
 else:
+    print("Loading vectors...")
     model = gensim.models.KeyedVectors.load('gnews.embedding')
 
 # nltk.download('stopwords')
+# Load stopwords
 stopwords = set(stopwords.words('english'))
 # https://github.com/mmihaltz/word2vec-GoogleNews-vectors
 pad_to_length = 32
@@ -45,7 +49,10 @@ def embed_tokens(tokens):
 
 
 clf = None
-if retrain:
+retrain = False
+if not path.exists("classifier.joblib") or retrain:
+
+    print("Training network...")
 
     spam = pd.read_csv('data/spam.csv', encoding="utf-8")
     notspam = pd.read_csv('data/notspam.csv', encoding="latin")
@@ -81,9 +88,10 @@ if retrain:
 
     dump(clf, "classifier.joblib")
 else:
+    print("Loading classifier...")
     clf = load("classifier.joblib")
 
-if compute_scores:
+if not path.exists("leaderboard.txt"):
     print("Computing scores...")
     leaderboard = []
     with open("data/words_alpha.txt", "r") as words:
