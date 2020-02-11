@@ -1,3 +1,7 @@
+# generate_scores.py compiles, trains, and executes tweet spam detection.
+# Feb 11, 2020
+__author__ = 'Trevor Nelson'
+
 import gensim
 import pandas as pd
 from os import path
