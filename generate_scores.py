@@ -3,6 +3,7 @@
 __author__ = 'Trevor Nelson'
 
 import gensim
+import nltk
 import pandas as pd
 from os import path
 from joblib import dump, load
@@ -21,10 +22,10 @@ else:
     print("Loading vectors...")
     model = gensim.models.KeyedVectors.load('gnews.embedding')
 
-# nltk.download('stopwords')
+nltk.download('stopwords')
 # Load stopwords
-stopwords = set(stopwords.words('english'))
 # https://github.com/mmihaltz/word2vec-GoogleNews-vectors
+stopwords = set(stopwords.words('english'))
 pad_to_length = 32
 
 
@@ -113,4 +114,4 @@ while True:
     tweet = input("Enter a tweet to evaluate:\n> ")
     if tweet == "exit":
         break
-    print(str(clf.predict([embed_tokens(split_sanitize(tweet))])[0] * 100) + "% spaminess")
+    print(str(clf.predict([embed_tokens(split_sanitize(tweet))])[0] * 100) + "% spamminess")
