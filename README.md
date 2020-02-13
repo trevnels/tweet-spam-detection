@@ -1,6 +1,10 @@
 # tweet-spam-detection
 
-WARNING: Data not included!
+My second-ever machine learning project. This assigns a "spamminess" score to any input text using an embedding encoder + NN architecture.
+
+I tried using one-hot encoding at first. 0/10 would not recommend. Bricked my computer. Twice.
+
+### WARNING: Data not included!
 
 Download https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit and place the `.gz` file into the root directory to get the needed embedding vector files.
 
@@ -19,6 +23,9 @@ Generate a graph of the "spammiest" words using a snapshot of the leaderboard fi
 
 ### Data sources:
 https://www.kaggle.com/vikasg/russian-troll-tweets
+
 https://www.kaggle.com/kazanova/sentiment140
+
 https://code.google.com/archive/p/word2vec/
+
 https://github.com/dwyl/english-words/blob/master/words_alpha.txt
